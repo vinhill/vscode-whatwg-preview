@@ -7,7 +7,7 @@ Provides previews on hover for links to WHATWG specifications.
 - Hover over a link to a WHATWG specification to see a preview of the specification.
 - Open the specification in a vscode webview from the link preview.
 
-\!\[Example preview\]\(images/example.png\)
+![Example preview](images/example.png)
 
 ## Extension Settings
 
