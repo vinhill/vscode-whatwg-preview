@@ -32,16 +32,7 @@ async function provideHover(document: vscode.TextDocument, position: vscode.Posi
     const preview = await getPreview(url);
     if (!preview) return;
 
-    const { origin, concept } = parseConceptLink(url) ?? {};
-    if (!origin || !concept) return;
-
-    const viewUrl = (() => {
-        const support_multipage = ["https://html.spec.whatwg.org"]
-        return support_multipage.includes(origin)
-            ? `${origin}/multipage/#${concept}`
-            : `${origin}/#${concept}`;
-    })();
-    const viewCommand = `command:extension.openSpecWebView?${JSON.stringify(encodeURIComponent(viewUrl))}`;
+    const viewCommand = `command:extension.openSpecWebView?${JSON.stringify(encodeURIComponent(url))}`;
 
     const markdown = new vscode.MarkdownString();
     markdown.appendMarkdown(preview);

@@ -6,6 +6,7 @@ Provides previews on hover for links to WHATWG specifications.
 
 - Hover over a link to a WHATWG specification to see a preview of the specification.
 - Open the specification in a vscode webview from the link preview.
+- Accessed specifications are cached in-memory to reduce load times.
 
 ![Example preview](images/example.png)
 
