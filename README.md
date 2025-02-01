@@ -1,21 +1,27 @@
 # whatwg-preview
 
+Provides previews on hover for links to WHATWG specifications.
+
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- Hover over a link to a WHATWG specification to see a preview of the specification.
+- Open the specification in a vscode webview from the link preview.
 
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+\!\[Example preview\]\(images/example.png\)
 
 ## Extension Settings
 
-None so far
+None
 
 ## Release Notes
 
 ### 1.0.0
 
 Initial release
+
+## Development
+
+- The [esbuild Problem Matchers](https://marketplace.visualstudio.com/items?itemName=connor4312.esbuild-problem-matchers) vscode extension is required. Otherwise, this error will occur:
+    ```
+    Error: Invalid problemMatcher reference: $esbuild-watch
+    ```

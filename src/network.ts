@@ -4,28 +4,28 @@
 import * as https from 'https';
 import { JSDOM } from 'jsdom';
 import { debug, err } from './logging';
+import { Maybe } from './utils';
 
 // cached pages
-let cache: { [url: string]: Document } = {};
+let cache: { [url: string]: string } = {};
 
 // pending page fetches
-let pending: { [url: string]: Promise<Document | null> } = {};
+let pending: { [url: string]: Promise<Maybe<string>> } = {};
 
-export default async function fetchPage(url: string): Promise<Document | null> {
+export async function fetchHTML(url: string): Promise<Maybe<string>> {
     if (url in cache) return cache[url];
     if (url in pending) return pending[url];
-    
+
     debug("network", `Fetching ${url}`);
-    const promise = new Promise<Document | null>((resolve, reject) => {
+    const promise = new Promise<Maybe<string>>((resolve, reject) => {
         https.get(url, (res) => {
             let data = '';
             res.on('data', chunk => data += chunk);
             res.on('end', () => {
                 try {
-                    const dom = new JSDOM(data);
-                    cache[url] = dom.window.document;
+                    cache[url] = data;
                     debug("network", `Cached ${url}`);
-                    resolve(dom.window.document);
+                    resolve(data);
                 } catch (error) {
                     err("network", `Error parsing fetched ${url}: ${error}`);
                     reject(error);
@@ -36,7 +36,13 @@ export default async function fetchPage(url: string): Promise<Document | null> {
             reject(error);
         });
     });
-    
+
     pending[url] = promise;
     return promise;
+}
+
+export async function fetchDocument(url: string): Promise<Maybe<Document>> {
+    const html = await fetchHTML(url);
+    if (!html) return;
+    return new JSDOM(html).window.document;
 }
