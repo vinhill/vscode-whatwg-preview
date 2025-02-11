@@ -7,7 +7,7 @@
     "url": "https://github.com/vinhill/vscode-whatwg-preview/tree/main"
   },
   "publisher": "vhilla",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.96.0"
   },

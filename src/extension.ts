@@ -35,8 +35,8 @@ async function provideHover(document: vscode.TextDocument, position: vscode.Posi
     const viewCommand = `command:extension.openSpecWebView?${JSON.stringify(encodeURIComponent(url))}`;
 
     const markdown = new vscode.MarkdownString();
-    markdown.appendMarkdown(preview);
     markdown.appendMarkdown(`\n\n[Open in Side View](${viewCommand})`);
+    markdown.appendMarkdown(preview);
     markdown.isTrusted = true;
     markdown.supportHtml = true;
 
